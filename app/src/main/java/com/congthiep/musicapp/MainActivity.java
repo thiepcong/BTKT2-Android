@@ -8,16 +8,19 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
 import com.congthiep.musicapp.fragment.InformationFragment;
 import com.congthiep.musicapp.fragment.ListFragment;
 import com.congthiep.musicapp.fragment.SearchAndStatisticsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomNavigationView bottomNavigationView;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
     private FloatingActionButton addSongButton;
     public final static int REQUEST_CODE = 1000;
 
@@ -26,32 +29,35 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
         addSongButton = findViewById(R.id.add_song_button);
+        tabLayout.addTab(tabLayout.newTab().setText("List Song"));
+        tabLayout.addTab(tabLayout.newTab().setText("Song Detail"));
+        tabLayout.addTab(tabLayout.newTab().setText("Search And Statistic"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        bottomNavigationView.setOnItemSelectedListener(item -> {
-            Fragment selectedFragment = null;
+        AdapterPaper adapter = new AdapterPaper(this,getSupportFragmentManager(),tabLayout.getTabCount());
+        viewPager.setAdapter(adapter);
 
-            int itemId = item.getItemId();
-            if (itemId == R.id.ic_home) {
-                selectedFragment = new ListFragment();
-            } else if (itemId == R.id.ic_detail) {
-                selectedFragment = new InformationFragment();
-            } else if (itemId == R.id.ic_search) {
-                selectedFragment = new SearchAndStatisticsFragment();
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                viewPager.setCurrentItem(tab.getPosition());
             }
 
-            if (selectedFragment != null) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        selectedFragment).commit();
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
             }
 
-            return true;
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
         });
-
-        // Mặc định chọn Fragment danh sách khi mở ứng dụng
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new ListFragment()).commit();
 
         addSongButton.setOnClickListener(new View.OnClickListener() {
             @Override

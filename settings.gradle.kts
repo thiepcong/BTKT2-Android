@@ -3,6 +3,10 @@ pluginManagement {
         google()
         mavenCentral()
         gradlePluginPortal()
+        mavenCentral()
+        maven { url =uri("https://maven.google.com") }
+        gradlePluginPortal()
+        jcenter()
     }
 }
 dependencyResolutionManagement {
@@ -10,6 +14,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        mavenCentral()
+        maven { url =uri("https://maven.google.com") }
+        gradlePluginPortal()
+        jcenter()
     }
 }
 
