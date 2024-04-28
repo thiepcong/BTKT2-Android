@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">MusicApp</string>
+
+    <string-array name="albums_array">
+        <item>Cho 1 tình yêu</item>
+        <item>Nỗi yêu bé dại</item>
+        <item>Cây lặng - Gió ngừng</item>
+        <item>Có dừng được không</item>
+        <item>Đây là mơ</item>
+        <item>Ở giữa cuộc đời</item>
+    </string-array>
+
+    <string-array name="albums_array_filter">
+        <item>--Tất cả--</item>
+        <item>Cho 1 tình yêu</item>
+        <item>Nỗi yêu bé dại</item>
+        <item>Cây lặng - Gió ngừng</item>
+        <item>Có dừng được không</item>
+        <item>Đây là mơ</item>
+        <item>Ở giữa cuộc đời</item>
+    </string-array>
+
+    <string-array name="types_array">
+        <item>country</item>
+        <item>blue</item>
+        <item>rock</item>
+        <item>pop</item>
+    </string-array>
+</resources>
